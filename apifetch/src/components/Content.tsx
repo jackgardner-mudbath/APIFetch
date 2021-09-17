@@ -6,44 +6,62 @@ import "../App.css"
 type Store = {
     id: number
     name: string
+    isActive: boolean
     images: {}
 }
 
-type storeList = {
-    Stores: Store[]
-}
+// type storeList = {
+//     Stores: Store[]
+// }
 
 function Content(){
-    const [stores, setStores] = useState<storeList>({Stores: []});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [stores, setStores] = useState([]);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('https://www.cheapshark.com/api/1.0/stores')
-            .then(resp =>{
-                if(resp.ok) {
-                    return resp.json();
-                }
-                throw resp;
-            })
-            .then(data => {
-                //console.log(data);
-                setStores(data);
-            })
-            .catch(error => {
-                console.log("Error fetching data: ", error);
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            })
+        const fetchData = async () =>{
+            const data = await fetch('https://www.cheapshark.com/api/1.0/stores');
+            const json = await data.json();
+            setStores(json);
+        }
+        fetchData()
+        .catch(console.error);
+        // fetch('https://www.cheapshark.com/api/1.0/stores')
+            // .then(resp =>{
+            //     if(resp.ok) {
+            //         return resp.json();
+            //     }
+            //     throw resp;
+            // })
+            // .then(data => {
+            //     console.log(data);
+            //     setStores(data);
+            // })
+            // .catch(error => {
+            //     console.log("Error fetching data: ", error);
+            //     setError(error);
+            // })
+            // .finally(() => {
+            //     setLoading(false);
+            // })
     }, [])
-    if(loading) return <FaSpinner/>
-    if(error) return <div>Error!</div>
+    // if (loading) {
+    //     return <p>Data is loading... <FaSpinner/></p>;
+    //     setLoading(false);
+    // stores.map(s => {
+    //     console.log(s)
+    // })
+    // }
     return(
         <div>
-            <h1>Top Deals by Store</h1>
-            {console.log(stores)}
+            <h1>Top Deals by Store</h1> 
+            {
+               stores.map((s : any) => {
+                    <p key={s.storeID}>{s}</p>
+               })
+                
+            }
         </div>
     )
 }
