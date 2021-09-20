@@ -8,11 +8,9 @@ function Navbar() {
         <div className="Navbar">
             <div className="leftSide">
                 <div className="links" id={showLinks ? "hidden" : ""}>
-                    <a href="">Home</a>
-                    <a href="/browse">Browse</a>
-                    <a href="/search">Search</a>
-                    <a href="/raffle">Giveaways</a>
-                    <a href="/about">About</a>
+                    <a href="/content">Home</a>
+                    <a href="/games">Games</a>
+                    <a href="/deals">Deals</a>
                 </div>
                 <button onClick={()=> setShowLinks(!showLinks)}><MdMenu/></button>
             </div>
