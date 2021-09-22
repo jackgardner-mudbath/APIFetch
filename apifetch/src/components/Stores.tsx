@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react'
 //import { FaSpinner } from "react-icons/fa";
 import "../App.css"
 
-// //Store types
+//Types
 type Store = {
     storeID: number
     storeName: string
     isActive: boolean
-    images: {}
+    images: {
+        banner: string
+        icon: string
+        logo: string
+    }
 }
-
 type storeList = Store[]
 
 // type Deal = {
@@ -19,7 +22,7 @@ type storeList = Store[]
 //     storeID: number
 // }
 
-function Content(){
+function Stores(){
     const [stores, setStores] = useState<storeList>([]);
     useEffect(() => {
         const fetchData = async () => {
@@ -28,9 +31,9 @@ function Content(){
             const json: storeList = await data.json();
             //Filter out all inactive stores i.e isActive = 0
             setStores(json.filter(x => x.isActive));
-            const dealData = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&pageSize=10')
-            const dealJSON = await dealData.json();
-            console.log(dealJSON);
+            //const dealData = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&pageSize=10')
+            //const dealJSON = await dealData.json();
+            //console.log(dealJSON);
         }
         fetchData()
         .catch(console.error);
@@ -41,12 +44,16 @@ function Content(){
             <h1>Top Deals by Store</h1>
             {
                stores.map((store) => (
-                   <div key={store.storeID}>
-                       <p>{store.storeName}</p>
+                   <div className="stores" key={store.storeID}>
+                       <ul>
+                           <li>
+                               <img className="storeBanner" alt = "banner" src={"https://www.cheapshark.com" + store.images.banner}/>
+                           </li>
+                       </ul>
                    </div>
                ))
             }  
         </div>
     )
 }
-export default Content;
+export default Stores;
