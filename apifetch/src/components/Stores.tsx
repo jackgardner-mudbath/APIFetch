@@ -15,44 +15,33 @@ type Store = {
 }
 type storeList = Store[]
 
-// type Deal = {
-//     internalName: string
-//     title: string
-//     dealID: string
-//     storeID: number
-// }
-
 function Stores(){
     const [stores, setStores] = useState<storeList>([]);
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetch('https://www.cheapshark.com/api/1.0/stores');
+            const response = await fetch('https://www.cheapshark.com/api/1.0/stores');
+            //Error handling for fetch()
+            if(!response.ok){
+                const message = "An error has occured" + response.status;
+                throw new Error(message)
+            }
             //making json type storeList so we can filter out all inactive stores
-            const json: storeList = await data.json();
-            //Filter out all inactive stores i.e isActive = 0
-            setStores(json.filter(x => x.isActive));
-            //const dealData = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&pageSize=10')
-            //const dealJSON = await dealData.json();
-            //console.log(dealJSON);
+            const json: storeList = await response.json();
+            return json;
         }
-        fetchData()
-        .catch(console.error);
+        fetchData().then(json => {
+            setStores(json.filter(x => x.isActive));
+        }).catch(error => {console.log(error.message)});
     }, [])
 
     return(
         <div>
-            <h1>Top Deals by Store</h1>
+            <h1>Stores</h1>
             {
                stores.map((store) => (
-                   <div className="stores" key={store.storeID}>
-                       <ul>
-                           <li>
-                               <img className="storeBanner" alt = "banner" src={"https://www.cheapshark.com" + store.images.banner}/>
-                           </li>
-                       </ul>
-                   </div>
+                  <img key={store.storeID} className="storeBanner" alt = "banner" src={"https://www.cheapshark.com" + store.images.banner}/>
                ))
-            }  
+            }
         </div>
     )
 }

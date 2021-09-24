@@ -29,10 +29,12 @@ h1{
 
 .Navbar .leftSide .links{
   max-height: 5rem;
+  display: flex;
+  align-items: center;
+  list-style: none;
 }
 
-.Navbar .leftSide .links a{
-  text-decoration: none;
+.Navbar .leftSide .links li{
   color: white;
   font-size: 25px;
   margin-left: 15px; 
@@ -45,6 +47,10 @@ h1{
 
 .Navbar .leftSide #hidden{
   display: flex;
+}
+
+.activeLink{
+  font-weight: bold;
 }
 
 .Navbar .rightSide{
@@ -72,18 +78,44 @@ h1{
   border-radius: 10px;
 }
 
-.stores ul{
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.storeBanner{
+  background-color: #2f2e34;
+  width: auto;
+  margin-left: 40px;
+  display: flexbox; 
+  flex-direction:row;
   flex-wrap: wrap;
 }
 
-.stores li{
-  background-color: #2f2e34;
-  width: auto;
-  margin: auto;
+.table-container{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-headers{
+  text-align: center;
+}
+
+.table-body td{
+  text-align: center;
+  border-bottom: 1px solid #4d4b4b;
+}
+
+.table-body img{
+  height: 39px;
+    width: 102px;
+    background-repeat: no-repeat;
+    background-position: top;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    -webkit-background-size: contain;
+    background-size: contain;
+    background-color: #13171e;
+    border: 1px solid #123;
+    -webkit-box-shadow: 3px 3px 5px #151515;
+    box-shadow: 3px 3px 5px #151515;
+    float: left;
+    margin-right: 10px;
 }
 
 @media only screen and (max-width: 850px){
@@ -109,9 +141,9 @@ h1{
   .Navbar .leftSide #hidden{
     position: absolute;
     left: 0px;
-    top: 80px;
-    height: 130px;
-    max-height: 130px;
+    top: 70px;
+    height: 140px;
+    max-height: 140px;
     width: 100%;
     background-color: #00BDFF;
     display: flex;

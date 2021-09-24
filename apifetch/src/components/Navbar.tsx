@@ -1,24 +1,38 @@
 import React, {useState} from 'react'
-import { MdMenu, MdSearch } from "react-icons/md";
+import { MdMenu, MdSearch } from 'react-icons/md';
+import {NavLink} from 'react-router-dom';
 import "../App.css"
 
 function Navbar() {
     const [showLinks, setShowLinks] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+    const updateState = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setInputValue(event.target.value);
+    }
+    const sendInput = (event: React.MouseEvent<HTMLButtonElement>): void => {
+        console.log(inputValue);
+    }
     return(
-        <div className="Navbar">
+        <nav className="Navbar">
             <div className="leftSide">
-                <div className="links" id={showLinks ? "hidden" : ""}>
-                    <a href="/content">Home</a>
-                    <a href="/games">Games</a>
-                    <a href="/deals">Deals</a>
-                </div>
+                <ul className="links" id={showLinks ? "hidden" : ""}>
+                    <NavLink exact to='/' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                        <li>Home</li>
+                    </NavLink>
+                    <NavLink exact to='/games' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                        <li>Games</li>
+                    </NavLink>
+                    <NavLink exact to='/deals' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                        <li>Deals</li>
+                    </NavLink>
+                </ul>
                 <button onClick={()=> setShowLinks(!showLinks)}><MdMenu/></button>
             </div>
             <div className="rightSide">
-                <input type="text" placeholder="Search..."/>
-                <button><MdSearch/></button>
+                <input onChange={updateState}type="text" placeholder="Search..."/>
+                <button onClick={sendInput}><MdSearch/></button>
             </div>
-        </div>
+        </nav>
     )
 }
 export default Navbar
