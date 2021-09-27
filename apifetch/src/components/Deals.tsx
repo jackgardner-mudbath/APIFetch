@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import {Link} from 'react-router-dom';
-import { FaHeart, FaRegHeart} from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
 import {VscLoading} from 'react-icons/vsc';
-import "../App.css"
+import Favourite from '../components/Favourite';
+import "../App.css";
 
-type deal = {
+export type deal = {
     dealID: string
     dealRating: string
     gameID: string
@@ -78,7 +77,7 @@ function Deals(){
                                         <sup><del>{deal.normalPrice}</del></sup>
                                     </td>
                                     <td>{deal.dealRating}</td>
-                                    <td><FaRegHeart/></td>
+                                    <Favourite/>
                                 </tr>
                             ))
                         }

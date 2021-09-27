@@ -19,11 +19,11 @@ function Navbar() {
                     <NavLink exact to='/' activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Home</li>
                     </NavLink>
-                    <NavLink exact to='/games' activeClassName="activeLink" style={{textDecoration: 'none'}}>
-                        <li>Games</li>
-                    </NavLink>
                     <NavLink exact to='/deals' activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Deals</li>
+                    </NavLink>
+                    <NavLink exact to='/games' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                        <li>Search</li>
                     </NavLink>
                 </ul>
                 <button onClick={()=> setShowLinks(!showLinks)}><MdMenu/></button>

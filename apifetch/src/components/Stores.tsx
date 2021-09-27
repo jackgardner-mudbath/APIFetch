@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-//import { FaSpinner } from "react-icons/fa";
 import "../App.css"
 
-//Types
 type Store = {
     storeID: number
     storeName: string
@@ -13,7 +11,10 @@ type Store = {
         logo: string
     }
 }
+
 type storeList = Store[]
+
+
 
 function Stores(){
     const [stores, setStores] = useState<storeList>([]);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-//import { FaSpinner } from "react-icons/fa";
 import "../App.css"
 
 type game = {
@@ -29,25 +28,20 @@ function Games(){
             return json;
         }
         fetchData().then(json => {
-            //console.log(json);
+            setGames(json);
         }).catch(error => {console.log(error.message)});
     }, [])
     return(
         <div>
             <h1>Games</h1>
-            <table className="table">
-                <tbody>
-                    <tr className="table-headers">
-                        <th>Store</th>
-                        <th>Savings</th>
-                        <th>Price</th>
-                        <th>Title</th>
-                        <th>Deal Rating</th>
-                        <th>Release</th>
-                    </tr>
-
-                </tbody>
-            </table>
+            {
+                games.map((game) => (
+                    <div key={game.gameID}>
+                        <p>{game.external}</p>
+                        <img src={game.thumb}/>
+                    </div>
+                ))
+            }
         </div>
     )
 }
