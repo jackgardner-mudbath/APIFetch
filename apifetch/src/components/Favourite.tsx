@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { FaHeart, FaRegHeart} from "react-icons/fa";
-import deal from "../components/Deals";
 import "../App.css";
 
 /**
@@ -10,7 +9,7 @@ import "../App.css";
  */
 
 
-function Favourite(){
+function Favourite(props: {id: string}){
     const [favourite, setFavourite] = useState(false);
     return(
         <td className="fave-container">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { MdSearch } from 'react-icons/md';
 import "../App.css"
 
 type game = {
@@ -13,11 +14,15 @@ type game = {
 
 type gamesList = game[]
 
+const gamesEP = 'https://www.cheapshark.com/api/1.0/games?title=';
+
 function Games(){
     const [games, setGames] = useState<gamesList>([]);
+    const [input, setInput] = useState<string>();
+    
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://www.cheapshark.com/api/1.0/games?title=escapists');
+            const response = await fetch(gamesEP + input);
             //Error handling for fetch()
             if(!response.ok){
                 const message = "An error has occured" + response.status;
@@ -30,17 +35,17 @@ function Games(){
         fetchData().then(json => {
             setGames(json);
         }).catch(error => {console.log(error.message)});
-    }, [])
+    }, [input])
     return(
         <div>
             <h1>Games</h1>
+            <input placeholder="Search..." type="text" value={input}
+            onChange={e => setInput(e.target.value)} />
+            <button><MdSearch/></button>
             {
-                games.map((game) => (
-                    <div key={game.gameID}>
-                        <p>{game.external}</p>
-                        <img src={game.thumb}/>
-                    </div>
-                ))
+               games.map((game) => (
+                    <p key={game.gameID}>{game.external}</p>
+               ))
             }
         </div>
     )
