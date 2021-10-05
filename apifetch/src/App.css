@@ -122,6 +122,12 @@ h1{
     margin-right: 10px;
 }
 
+.search-wrapper{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .fave-button{
   background-color: transparent;
   border: none;

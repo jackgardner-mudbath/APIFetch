@@ -68,8 +68,9 @@ function Deals(){
                             deals.map(deal => (
                                 <tr key={deal.dealID}>
                                     <td style={{textAlign: 'left'}}>
-                                        <img src={deal.thumb}/>
-                                        <a href={redirectURL + deal.dealID} target="_blank" style={{textDecoration: 'none', color: 'black'}}>{deal.title}</a>
+                                        <a href={redirectURL + deal.dealID} target="_blank" rel="noreferrer" style={{textDecoration: 'none', color: 'black'}}>
+                                            <img alt={deal.dealID} src={deal.thumb}/>{deal.title}
+                                        </a>
                                     </td>
                                     <td>{Math.floor(parseInt(deal.savings))}%</td>
                                     <td>

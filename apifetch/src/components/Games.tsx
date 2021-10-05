@@ -16,10 +16,15 @@ type gamesList = game[]
 
 const gamesEP = 'https://www.cheapshark.com/api/1.0/games?title=';
 
+function updateInput(){
+    
+}
+
 function Games(){
     const [games, setGames] = useState<gamesList>([]);
     const [input, setInput] = useState<string>();
-    
+    const [error, setError] = useState<boolean>();
+    const [failCount, setFailCount] = useState(100);
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(gamesEP + input);
@@ -30,22 +35,38 @@ function Games(){
             }
             //making json type storeList so we can filter out all inactive stores
             const json = await response.json();
-            return json;
+            console.log("failCounter is ", failCount);
+            setFailCount(failCount-1);
+            if(failCount === 0)
+            {
+                setFailCount(10);
+                throw new Error("forced API to fail");
+            }
+            else return json;
         }
         fetchData().then(json => {
             setGames(json);
-        }).catch(error => {console.log(error.message)});
+        }).catch(error => 
+            {
+                setError(true);
+                console.log(error.message)
+            });
     }, [input])
     return(
         <div>
             <h1>Games</h1>
-            <input placeholder="Search..." type="text" value={input}
-            onChange={e => setInput(e.target.value)} />
-            <button><MdSearch/></button>
             {
-               games.map((game) => (
-                    <p key={game.gameID}>{game.external}</p>
-               ))
+                error ? <p>Error your search request could not be completed, please try again</p> :
+                <div className="search-wrapper">
+                <input placeholder="Search..." type="text" value={input}
+                onChange={e => setInput(e.target.value)} />
+                <button><MdSearch/></button>
+                {
+                    games.map((game) => (
+                            <p key={game.gameID}>{game.external}</p>
+                    ))
+                }
+                </div>
             }
         </div>
     )
