@@ -78,7 +78,7 @@ function Deals(){
                                         <sup><del>{deal.normalPrice}</del></sup>
                                     </td>
                                     <td>{deal.dealRating}</td>
-                                    <Favourite id={deal.dealID}/>
+                                    <Favourite data={deal}/>
                                 </tr>
                             ))
                         }

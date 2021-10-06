@@ -25,6 +25,9 @@ function Navbar() {
                     <NavLink exact to='/games' activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Search</li>
                     </NavLink>
+                    <NavLink exact to='/wishlist' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                        <li>Wishlist</li>
+                    </NavLink>
                 </ul>
                 <button onClick={()=> setShowLinks(!showLinks)}><MdMenu/></button>
             </div>

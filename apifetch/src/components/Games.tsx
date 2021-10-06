@@ -35,8 +35,7 @@ function Games(){
             }
             //making json type storeList so we can filter out all inactive stores
             const json = await response.json();
-            console.log("failCounter is ", failCount);
-            setFailCount(failCount-1);
+            setFailCount(failCount => failCount-1);
             if(failCount === 0)
             {
                 setFailCount(10);

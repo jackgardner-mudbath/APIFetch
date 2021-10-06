@@ -14,8 +14,6 @@ type Store = {
 
 type storeList = Store[]
 
-
-
 function Stores(){
     const [stores, setStores] = useState<storeList>([]);
     useEffect(() => {
