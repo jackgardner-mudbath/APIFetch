@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {IoIosHeart, IoIosHeartEmpty} from "react-icons/io";
 import "../App.css";
 
-function Favourite(props: {data: {dealID: string}}){
+const Favourite = (props: {data: {dealID: string}}) => {
     const [favourites, setFavourites] = useState([] as Array<{dealID: string}>);
     const getFavourites = JSON.parse(localStorage.getItem('favourites') || "");
 

@@ -7,7 +7,7 @@ import Deals from './components/Deals';
 import Wishlist from './components/Wishlist';
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">

@@ -1,7 +1,7 @@
 import React from 'react';
 import "../App.css";
 
-function Wishlist() {
+const Wishlist = () => {
     var favourites = [{}];
     const getFavourites = JSON.parse(localStorage.getItem('favourites') || "");
     for(var i = 0; i < getFavourites.length; i++)

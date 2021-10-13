@@ -29,7 +29,7 @@ type dealsList = deal[]
 
 const redirectURL: string = "https://www.cheapshark.com/redirect?dealID=";
 
-function Deals(){
+const Deals = () => {
     const [deals, setDeals] = useState<dealsList>([]);
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {

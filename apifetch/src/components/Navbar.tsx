@@ -3,7 +3,7 @@ import { MdMenu, MdSearch } from 'react-icons/md';
 import {NavLink} from 'react-router-dom';
 import "../App.css"
 
-function Navbar() {
+const Navbar = () => {
     const [showLinks, setShowLinks] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const updateState = (event: React.ChangeEvent<HTMLInputElement>): void => {
