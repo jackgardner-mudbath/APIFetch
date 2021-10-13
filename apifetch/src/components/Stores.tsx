@@ -25,12 +25,12 @@ function Stores(){
                 throw new Error(message)
             }
             //making json type storeList so we can filter out all inactive stores
-            const json: storeList = await response.json();
-            return json;
-        }
-        fetchData().then(json => {
+            const json: storeList = await response.json().catch(error => {
+                console.log(error.message);
+            });
             setStores(json.filter(x => x.isActive));
-        }).catch(error => {console.log(error.message)});
+        }
+        fetchData();
     }, [])
 
     return(

@@ -40,13 +40,13 @@ const Deals = () => {
                 const message = "An error has occured" + response.status;
                 throw new Error(message)
             }
-            const json = await response.json();
-            return json;
-        }
-        fetchData().then(json => {
+            const json = await response.json().catch(error => {
+                console.log(error.message);
+            });
             setDeals(json);
             setLoading(false);
-        }).catch(error => {console.log(error.message)});
+        }
+        fetchData();
     }, [])   
     return(
         <div>

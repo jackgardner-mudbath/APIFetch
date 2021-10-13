@@ -45,14 +45,12 @@ const Games = (navInput?:string) => {
                 //const msg = "Forced API to fail";
                 //throw new Error(msg);
             }
-            const json = await response.json();
-            return json;
-        }
-        fetchData().then(json => {
+            const json = await response.json().catch(error => {
+                console.log(error.message);
+            });
             setGames(json);
-        }).catch(error => {
-            console.log(error.message)
-        });
+        }
+        fetchData();
     }, [btnPress])
     return(
         <div>

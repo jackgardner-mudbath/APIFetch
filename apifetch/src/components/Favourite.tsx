@@ -30,15 +30,8 @@ const Favourite = (props: {data: {dealID: string}}) => {
         setFavourites([...favourites]);
         localStorage.setItem("favourites", JSON.stringify(favourites));
         let storage = localStorage.getItem('favItem' + (data.dealID) || "");
-        if(storage === null)
-        {
-            localStorage.setItem(('favItem' + (data.dealID)), JSON.stringify(data));
-        } 
-        else
-        {
-            localStorage.removeItem('favItem' + (data.dealID));
-        }
-
+        (storage === null) ? localStorage.setItem(('favItem' + (data.dealID)), JSON.stringify(data)) 
+                           : localStorage.removeItem('favItem' + (data.dealID));
     }
     return(
         <td className="fave-container">
