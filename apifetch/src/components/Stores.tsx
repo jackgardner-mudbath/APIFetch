@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import {Store, storeList} from "../models/store.models"
 import "../App.css"
 
-type Store = {
-    storeID: number
-    storeName: string
-    isActive: boolean
-    images: {
-        banner: string
-        icon: string
-        logo: string
-    }
-}
 
-type storeList = Store[]
 
-function Stores(){
+const Stores = () => {
     const [stores, setStores] = useState<storeList>([]);
     useEffect(() => {
         const fetchData = async () => {

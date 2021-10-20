@@ -1,31 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {VscLoading} from 'react-icons/vsc';
 import Favourite from '../components/Favourite';
+import {deal, dealsList} from '../models/deals.models'
 import "../App.css";
-
-export type deal = {
-    dealID: string
-    dealRating: string
-    gameID: string
-    internalName: string
-    isOnSale: number
-    lastChange: number
-    metacriticLink: string
-    metacriticScore: string
-    normalPrice: string
-    releaseDate: number
-    salePrice: string
-    savings: string
-    steamAppID: string
-    steamRatingCount: string
-    steamRatingPercent: string
-    steamRatingText: string
-    storeID: string
-    thumb: string
-    title: string
-}
-
-type dealsList = deal[]
 
 const redirectURL: string = "https://www.cheapshark.com/redirect?dealID=";
 

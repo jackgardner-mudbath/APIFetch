@@ -1,22 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { MdSearch } from 'react-icons/md';
+import {game, gamesList} from '../models/games.models'
 import "../App.css"
 
-type game = {
-    cheapest: string
-    cheapestDealID: string
-    external: string
-    gameID: string
-    internalName: string
-    steamAppID: string
-    thumb: string
-}
-
-type gamesList = game[]
 
 const gamesEP = 'https://www.cheapshark.com/api/1.0/games?title=';
 
-const Games = (navInput?:string) => {
+const Games = (props?: {navInput:string}) => {
     const [games, setGames] = useState<gamesList>([]);
     const [input, setInput] = useState<string>();
     const [btnPress, setBtnPress] = useState<boolean>(false);
@@ -31,7 +21,7 @@ const Games = (navInput?:string) => {
         const fetchData = async () => {
             failCount.current++;
             //if the user has used the search bar in the nav bar use that value for the fetch request
-            let url = (typeof navInput === "string") ? gamesEP + navInput : gamesEP + input;
+            let url = (typeof props !== "undefined") ? gamesEP + props.navInput : gamesEP + input;
             const response = await fetch(gamesEP + input);
             //Error handling for fetch()
             if(!response.ok){
