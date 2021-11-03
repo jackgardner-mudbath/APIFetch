@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {VscLoading} from 'react-icons/vsc';
 import Favourite from '../pages/Favourite';
 import { dealsList } from '../models/deals.models'
-import { storeList } from '../models/store.models'
 import "../App.css";
 
 const redirectURL: string = "https://www.cheapshark.com/redirect?dealID=";
@@ -10,9 +9,12 @@ const redirectURL: string = "https://www.cheapshark.com/redirect?dealID=";
 const Deals = () => {
     const [deals, setDeals] = useState<dealsList>([]);
     const [isLoading, setLoading] = useState(true);
+    const [pageNumber, setPageNumber] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('https://www.cheapshark.com/api/1.0/deals?');
+            console.log(pageNumber);
+            let fetchURL = 'https://www.cheapshark.com/api/1.0/deals?pageSize=8&pageNumber=' + pageNumber;
+            const response = await fetch(fetchURL);
             //Error handling for fetch()
             if(!response.ok){
                 const message = "An error has occured" + response.status;
@@ -25,7 +27,7 @@ const Deals = () => {
             setLoading(false);
         }
         fetchData();
-    }, [])   
+    }, [pageNumber])   
     return(
         <div>
             <h1>Deals</h1>
@@ -63,6 +65,20 @@ const Deals = () => {
                     </tbody>
                 </table>
             }
+            <span>
+                <button onClick={() => {
+                setPageNumber(pageNumber - 1);
+                setLoading(true);
+                }}> 
+                    Prev
+                </button>
+                <button onClick={() => {
+                setPageNumber(pageNumber + 1);
+                setLoading(true);
+                }}> 
+                    Next
+                </button>
+            </span>
         </div>
     )
 }
