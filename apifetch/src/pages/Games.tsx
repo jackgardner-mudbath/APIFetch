@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { MdSearch } from 'react-icons/md';
-import {game, gamesList} from '../models/games.models'
+import { gamesList } from '../models/games.models'
 import "../App.css"
 
 
@@ -8,7 +8,6 @@ const gamesEP = 'https://www.cheapshark.com/api/1.0/games?title=';
 
 const Games = (props?: {navInput:string}) => {
     const [games, setGames] = useState<gamesList>([]);
-    //const [input, setInput] = useState<string>();
     const inputRef = useRef<HTMLInputElement>(null);
     const [btnPress, setBtnPress] = useState<boolean>(false);
     useEffect(() => {

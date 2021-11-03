@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import {VscLoading} from 'react-icons/vsc';
-import Favourite from '../components/Favourite';
-import {deal, dealsList} from '../models/deals.models'
+import Favourite from '../pages/Favourite';
+import { dealsList } from '../models/deals.models'
+import { storeList } from '../models/store.models'
 import "../App.css";
 
 const redirectURL: string = "https://www.cheapshark.com/redirect?dealID=";

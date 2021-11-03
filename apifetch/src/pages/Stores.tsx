@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import {Store, storeList} from "../models/store.models"
+import {storeList} from "../models/store.models"
 import "../App.css"
-
-
 
 const Stores = () => {
     const [stores, setStores] = useState<storeList>([]);
@@ -28,7 +26,7 @@ const Stores = () => {
             <h1>Stores</h1>
             {
                stores.map((store) => (
-                  <img key={store.storeID} className="storeBanner" alt = "banner" src={"https://www.cheapshark.com" + store.images.banner}/>
+                  <img key={store.storeID} className="storeBanner" alt = "banner" src={"https://www.cheapshark.com" + store.images.logo}/>
                ))
             }
         </div>

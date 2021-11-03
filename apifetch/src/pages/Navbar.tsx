@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { MdMenu, MdSearch } from 'react-icons/md';
 import {NavLink} from 'react-router-dom';
+import { Links } from '../models/links.models'
 import "../App.css"
 
 const Navbar = () => {
@@ -16,16 +17,16 @@ const Navbar = () => {
         <nav className="Navbar">
             <div className="leftSide">
                 <ul className="links" id={showLinks ? "hidden" : ""}>
-                    <NavLink exact to='/' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                    <NavLink exact to={Links.Home} activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Home</li>
                     </NavLink>
-                    <NavLink exact to='/deals' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                    <NavLink exact to={Links.Deals} activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Deals</li>
                     </NavLink>
-                    <NavLink exact to='/games' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                    <NavLink exact to={Links.Search} activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Search</li>
                     </NavLink>
-                    <NavLink exact to='/wishlist' activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                    <NavLink exact to={Links.Wishlist} activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Wishlist</li>
                     </NavLink>
                 </ul>
