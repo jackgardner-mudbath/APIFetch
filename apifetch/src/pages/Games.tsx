@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { MdSearch } from 'react-icons/md';
 import { gamesList } from '../models/games.models'
 import "../App.css"
@@ -37,7 +37,10 @@ const Games = (props?: {navInput:string}) => {
                 <button onClick={() => setBtnPress(!btnPress)}><MdSearch/></button>
                 {
                     games.map((game) => (
-                            <p key={game.gameID}>{game.external}</p>
+                            <span>
+                                <p key={game.gameID}>{game.external}</p>
+                                <img src={game.thumb}/>
+                            </span>
                     ))
                 }
                 </div>

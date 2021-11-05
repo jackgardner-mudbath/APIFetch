@@ -21,3 +21,6 @@ export type deal = {
 }
 
 export type dealsList = deal[]
+
+//URL for redirecting to the deal's store page
+export const redirectURL = "https://www.cheapshark.com/redirect?dealID=";

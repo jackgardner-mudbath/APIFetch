@@ -1,19 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, MouseEventHandler } from 'react';
 import {VscLoading} from 'react-icons/vsc';
+import {MdCheck, MdClose} from 'react-icons/md';
 import Favourite from '../pages/Favourite';
-import { dealsList } from '../models/deals.models'
+import { redirectURL, dealsList } from '../models/deals.models'
+import StoreIcons  from '../components/storeIcons'
 import "../App.css";
 
-const redirectURL: string = "https://www.cheapshark.com/redirect?dealID=";
+
+//TODO: move this to deals.models.ts
+const apiURL = 'https://www.cheapshark.com/api/1.0/deals?pageSize=8&pageNumber='
 
 const Deals = () => {
     const [deals, setDeals] = useState<dealsList>([]);
     const [isLoading, setLoading] = useState(true);
     const [pageNumber, setPageNumber] = useState(0);
+    const [sortBy, setSortBy] = useState("");
     useEffect(() => {
         const fetchData = async () => {
-            console.log(pageNumber);
-            let fetchURL = 'https://www.cheapshark.com/api/1.0/deals?pageSize=8&pageNumber=' + pageNumber;
+            let fetchURL = apiURL + pageNumber + sortBy
             const response = await fetch(fetchURL);
             //Error handling for fetch()
             if(!response.ok){
@@ -28,19 +32,32 @@ const Deals = () => {
         }
         fetchData();
     }, [pageNumber])   
+
     return(
         <div>
             <h1>Deals</h1>
+            <StoreIcons/>
             {
                 isLoading ? <VscLoading/> :             
                 <table className="table-container">
                     <thead className="table-headers">
                         <tr>
-                            <th>Title</th>
+                            <th onClick={() => {
+                                setSortBy('&sortBy=Title')
+                                console.log(deals)
+                            }}>
+                            Title</th>
                             <th>Savings</th>
-                            <th>Price</th>
+                            <th onClick={() => {
+                                setSortBy("&sortBy=Price")
+                                console.log(sortBy)
+                            }}>Price</th>
                             <th>Deal Rating</th>
                             <th>Favourite</th>
+                            <th onClick={() => {
+                                setDeals(deals.sort((a, b) => a.isOnSale === 0 ? 1 : -1))
+                                console.log(deals)
+                            }}>On Sale</th>
                         </tr>
                     </thead>
                     <tbody className="table-body">
@@ -59,6 +76,7 @@ const Deals = () => {
                                     </td>
                                     <td>{deal.dealRating}</td>
                                     <Favourite data={deal}/>
+                                    <td>{deal.isOnSale ? <MdCheck/> :<MdClose/> }</td>
                                 </tr>
                             ))
                         }
