@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { MdSearch } from 'react-icons/md';
-import { gamesList } from '../models/games.models'
+import { gamesList,gameHeadings  } from '../models/games.models'
+import Table from '../components/table'
 import "../App.css"
 
 
@@ -13,7 +14,6 @@ const Games = (props?: {navInput:string}) => {
     useEffect(() => {
         const fetchData = async () => {
             let url = gamesEP + inputRef.current!.value;
-            console.log(url);
             const response = await fetch(url);
             //Error handling for fetch()
             if(!response.ok){
@@ -34,15 +34,8 @@ const Games = (props?: {navInput:string}) => {
                // error.current ? (error.current = false, <p>Oops your search could not be completed, try again later</p>) :
                 <div className="search-wrapper">
                 <input placeholder="Search..." type="text" ref={inputRef}/>
-                <button onClick={() => setBtnPress(!btnPress)}><MdSearch/></button>
-                {
-                    games.map((game) => (
-                            <span>
-                                <p key={game.gameID}>{game.external}</p>
-                                <img src={game.thumb}/>
-                            </span>
-                    ))
-                }
+                <button onClick={() => setBtnPress(!btnPress)} onKeyPress={(e) =>{if(e.key === 'Enter') setBtnPress(!btnPress)}}><MdSearch/></button>
+                <Table data={games} headings={gameHeadings}/>
                 </div>
             }
         </div>

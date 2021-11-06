@@ -1,54 +1,30 @@
-import { Fragment } from 'react'
-import { useTable } from 'react-table'
-import { gamesList } from '../models/games.models'
-import { dealsList } from '../models/deals.models'
+import React from 'react'
+import { gamesList} from '../models/games.models'
+import { dealsList, dealHeadings } from '../models/deals.models'
 import "../App.css"
 
-//TODO: pass in column headers & the data as rows, think of sorting rows, maybe consider material ui
+//TODO: replace Object.keys with headings.map()
 
-
-type T = gamesList | dealsList
-
-//TODO: change any to a proper type
-
-const Table = ({columns, data} : any) => {
-    console.log("Debug Flag in Table.tsx", data);
-    const {
-        getTableProps, 
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow
-    } = useTable({ columns, data})
-
-    return(
-        <table {...getTableProps}>
-            <thead>
-                {
-                    headerGroups.map(headerGroup => {
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map(column => (
-                          <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-                        ))}
-                      </tr>
-                    })
-                }
-            </thead>
-            <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-                <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                })}
-                </tr>
-            );
-            })}
-            </tbody>
-        </table>
-    )
-} 
-
-
-export default Table
+const Table = (props: { data: gamesList | dealsList, headings: string[]}) => {
+    return (
+      <table>
+        <thead>
+          <tr>
+            {Object.keys(props.data[0] ?? {}).map((k) => (
+              <th key={k}>{k}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((item, rowIndex) => (
+            <tr key={rowIndex}>
+              {Object.values(item).map((v) => (
+                <td key={v}>{String(v)}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+  export default Table;

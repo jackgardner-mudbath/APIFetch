@@ -9,3 +9,9 @@ export interface game {
 }
 
 export type gamesList = game[]
+
+export const gameHeadings = [
+    "Title",
+    "Price",
+    "Thumbnail"
+]

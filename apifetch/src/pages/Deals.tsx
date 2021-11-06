@@ -1,11 +1,11 @@
-import { useState, useEffect, MouseEventHandler } from 'react';
+
+import React, { useState, useEffect, MouseEventHandler } from 'react';
 import {VscLoading} from 'react-icons/vsc';
 import {MdCheck, MdClose} from 'react-icons/md';
 import Favourite from '../pages/Favourite';
 import { redirectURL, dealsList } from '../models/deals.models'
 import StoreIcons  from '../components/storeIcons'
 import "../App.css";
-
 
 //TODO: move this to deals.models.ts
 const apiURL = 'https://www.cheapshark.com/api/1.0/deals?pageSize=8&pageNumber='
@@ -15,6 +15,7 @@ const Deals = () => {
     const [isLoading, setLoading] = useState(true);
     const [pageNumber, setPageNumber] = useState(0);
     const [sortBy, setSortBy] = useState("");
+
     useEffect(() => {
         const fetchData = async () => {
             let fetchURL = apiURL + pageNumber + sortBy
