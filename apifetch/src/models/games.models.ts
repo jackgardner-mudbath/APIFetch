@@ -10,6 +10,8 @@ export interface game {
 
 export type gamesList = game[]
 
+export const endpoint = 'https://www.cheapshark.com/api/1.0/games?title=';
+
 export const gameHeadings = [
     "Title",
     "Price",
