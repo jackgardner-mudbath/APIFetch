@@ -28,7 +28,8 @@ const Games = (props?: {navInput:string}) => {
                     <input placeholder="Search..." type="text" ref={inputRef} onKeyPress={(e) =>{if(e.key === 'Enter') setBtnPress(!btnPress)}}/>
                     <button onClick={() => setBtnPress(!btnPress)}><MdSearch/></button>
                 {
-                    error ? <p>Fetch Error</p> : <Table data={games} headings={gameHeadings}/>                  
+                    error ? <p>Fetch Error</p> : <Table data={games.map(({external, cheapest, thumb}) => ({external, cheapest, thumb}))
+                    } headings={gameHeadings}/>                  
                 }
                 </div>
             }

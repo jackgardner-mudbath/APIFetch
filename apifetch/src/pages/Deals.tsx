@@ -70,7 +70,7 @@ const Deals = () => {
                                     </td>
                                     <td>{Math.floor(parseInt(deal.savings))}%</td>
                                     <td>
-                                        <span>{deal.salePrice}</span>
+                                        <span>${deal.salePrice}</span>
                                         <sup><del>{deal.normalPrice}</del></sup>
                                     </td>
                                     <td>{deal.dealRating}</td>
