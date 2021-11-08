@@ -10,9 +10,10 @@ const Table = (props: { data: gamesList | dealsList, headings: string[]}) => {
       <table>
         <thead>
           <tr>
-            {Object.keys(props.data[0] ?? {}).map((k) => (
-              <th key={k}>{k}</th>
-            ))}
+            {props.headings.map((head, index) => (
+              <th key={index}>{head}</th>
+            ))
+            }
           </tr>
         </thead>
         <tbody>

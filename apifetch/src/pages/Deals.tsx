@@ -82,7 +82,7 @@ const Deals = () => {
                     </tbody>
                 </table>
             }
-            <span>
+            <>
                 <button onClick={() => {
                 setPageNumber(pageNumber - 1);
                 setLoading(true);
@@ -95,7 +95,7 @@ const Deals = () => {
                 }}> 
                     Next
                 </button>
-            </span>
+            </>
         </div>
     )
 }

@@ -22,6 +22,11 @@ export type deal = {
 
 export type dealsList = deal[]
 
+//Type guard for the custom interface/type above
+export const isDeal = (d:any): d is deal => {
+    return (d as deal) !== undefined
+}
+
 //URL for redirecting to the deal's store page
 export const redirectURL = "https://www.cheapshark.com/redirect?dealID=";
 
