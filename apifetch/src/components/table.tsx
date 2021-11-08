@@ -1,6 +1,6 @@
 import React from 'react'
 import { gamesList} from '../models/games.models'
-import { dealsList, dealHeadings } from '../models/deals.models'
+import { dealsList } from '../models/deals.models'
 import "../App.css"
 
 //TODO: replace Object.keys with headings.map()

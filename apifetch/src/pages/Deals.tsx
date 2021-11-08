@@ -1,37 +1,35 @@
 
-import React, { useState, useEffect, MouseEventHandler } from 'react';
+import React, { useState, useEffect } from 'react';
 import {VscLoading} from 'react-icons/vsc';
 import {MdCheck, MdClose} from 'react-icons/md';
 import Favourite from '../pages/Favourite';
-import { redirectURL, dealsList } from '../models/deals.models'
+import { redirectURL, dealsList, dealEndPoint, deal } from '../models/deals.models'
 import StoreIcons  from '../components/storeIcons'
+import { fetchData } from '../helpers'
+import Table from '../components/table'
 import "../App.css";
 
 //TODO: move this to deals.models.ts
-const apiURL = 'https://www.cheapshark.com/api/1.0/deals?pageSize=8&pageNumber='
+
 
 const Deals = () => {
     const [deals, setDeals] = useState<dealsList>([]);
+    const [error, setError] = useState<null | Error>()
     const [isLoading, setLoading] = useState(true);
     const [pageNumber, setPageNumber] = useState(0);
     const [sortBy, setSortBy] = useState("");
 
     useEffect(() => {
-        const fetchData = async () => {
-            let fetchURL = apiURL + pageNumber + sortBy
-            const response = await fetch(fetchURL);
-            //Error handling for fetch()
-            if(!response.ok){
-                const message = "An error has occured" + response.status;
-                throw new Error(message)
+        let fetchURL = dealEndPoint + pageNumber + sortBy
+        fetchData<dealsList>(fetchURL).then(x =>{
+            if(Array.isArray(x))
+            {
+                setDeals(x)
+                setLoading(false)
+                setError(null)
             }
-            const json = await response.json().catch(error => {
-                console.log(error.message);
-            });
-            setDeals(json);
-            setLoading(false);
-        }
-        fetchData();
+            else setError(x)
+        })
     }, [pageNumber])   
 
     return(

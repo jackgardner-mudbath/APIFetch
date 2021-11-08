@@ -10,3 +10,5 @@ export interface Store {
 }
 
 export type storeList = Store[]
+
+export const storeEndPoint = 'https://www.cheapshark.com/api/1.0/stores'

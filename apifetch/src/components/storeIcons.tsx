@@ -1,39 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import {storeList} from "../models/store.models"
+import {storeList, storeEndPoint} from "../models/store.models"
+import { fetchData } from '../helpers'
 import "../App.css"
 
-/**
- * Similar to Stores.tsx but is specifically for the Deals & Games page to show what stores are available
- * Generates a banner/line of all the icons of the available stores
- */
-
-const StoreIcons = () => {
+const Stores = () => {
     const [stores, setStores] = useState<storeList>([]);
+    const [error, setError] = useState<null | Error>()
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch('https://www.cheapshark.com/api/1.0/stores');
-            //Error handling for fetch()
-            if(!response.ok){
-                const message = "An error has occured" + response.status;
-                throw new Error(message)
+        fetchData<storeList>(storeEndPoint).then(x => {
+            if(Array.isArray(x)){
+                setStores(x.filter(x => x.isActive))
+                setError(null)
             }
-            //making json type storeList so we can filter out all inactive stores
-            const json: storeList = await response.json().catch(error => {
-                console.log(error.message);
-            });
-            setStores(json.filter(x => x.isActive));
-        }
-        fetchData();
+            else setError(x)
+        });            
     }, [])
 
     return(
-        <div>
+        <>
             {
+                error ? <p>Oops an error has occured please try again</p> :
                stores.map((store) => (
                   <img key={store.storeID} className="storeBanner" alt = "banner" src={"https://www.cheapshark.com" + store.images.icon}/>
                ))
             }
-        </div>
+        </>
     )
 }
-export default StoreIcons;
+export default Stores;
