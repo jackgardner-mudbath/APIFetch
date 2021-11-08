@@ -1,13 +1,12 @@
 import React from "react"
 import "../App.css"
 
-let priceRegex:RegExp = /\d{2}\.\d{2}/
-let imgRegex:RegExp = /gif|jpe?g|png/
+let priceRegex:RegExp = /\d{1,2}\.\d{2}/
+let imgRegex:RegExp = /gif|jpe?g|png|JPG/
+let savingsRegex:RegExp = /\d{2}\.\d{6}/
 
-console.log(priceRegex.test("59.99"))
-console.log(priceRegex.test("60.99"))
-console.log(imgRegex.test("image.jpg"))
-console.log(imgRegex.test("image.png"))
+console.log(priceRegex.test("85.042521"))
+console.log(savingsRegex.test("85.042521"))
 
 const renderHelper = (item: string) => {
   if(imgRegex.test(item))
@@ -22,9 +21,17 @@ const renderHelper = (item: string) => {
       style={{height: '60px', minHeight: '100%', background: 'no-repeat center center', backgroundSize: 'contain'}}/>
     )
   }
+  //Nesting these together because I can't figure out the regexes
   else if(priceRegex.test(item))
   {
-    console.log("price flag")
+    if(savingsRegex.test(item))
+    {
+      return(
+        <>
+          {Math.floor(parseInt(item))}%
+        </>
+      )
+    } else
     return(
       <>${item}</>
     )
