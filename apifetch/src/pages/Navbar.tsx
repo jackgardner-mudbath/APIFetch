@@ -6,13 +6,6 @@ import "../App.css"
 
 const Navbar = () => {
     const [showLinks, setShowLinks] = useState(false);
-    const [inputValue, setInputValue] = useState("");
-    const updateState = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setInputValue(event.target.value);
-    }
-    const sendInput = (event: React.MouseEvent<HTMLButtonElement>): void => {
-        console.log(inputValue);
-    }
     return(
         <nav className="Navbar">
             <div className="leftSide">
@@ -26,15 +19,15 @@ const Navbar = () => {
                     <NavLink exact to={Links.Search} activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Search</li>
                     </NavLink>
-                    <NavLink exact to={Links.Wishlist} activeClassName="activeLink" style={{textDecoration: 'none'}}>
+                    {/* <NavLink exact to={Links.Wishlist} activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Wishlist</li>
-                    </NavLink>
+                    </NavLink> */}
                 </ul>
                 <button onClick={()=> setShowLinks(!showLinks)}><MdMenu/></button>
             </div>
             <div className="rightSide">
-                <input onChange={updateState}type="text" placeholder="Search..."/>
-                <button onClick={sendInput}><MdSearch/></button>
+                <input type="text" placeholder="Search..."/>
+                <button><MdSearch/></button>
             </div>
         </nav>
     )
