@@ -2,22 +2,22 @@ import React, { useState, useEffect } from 'react';
 import {IoIosHeart, IoIosHeartEmpty} from "react-icons/io";
 import "../App.css";
 
-const Favourite = (props: {data: {dealID: string}}) => {
-    const [favourites, setFavourites] = useState([] as Array<{dealID: string}>);
+const Favourite = (props: {data: {}}) => {
+    const [favourites, setFavourites] = useState<{}[]>([{}]);
     const getFavourites = JSON.parse(localStorage.getItem('favourites') || "");
 
     useEffect(() => {
-        if(getFavourites !== "")
-        {
-            setFavourites([...getFavourites]);
-        }
+        // if(getFavourites !== "")
+        // {
+        //     setFavourites([...getFavourites]);
+        // }
     }, []);
 
-    const addFav = (data: {dealID:string}) => {
+    const addFav = (data: {}) => {
         let addArr = true;
         //TODO: change map to a some, return true if something was removed
         favourites.map((item, key) => {
-            if(item.dealID === data.dealID)
+            if(item === data)
             {
                 favourites.splice(key, 1);
                 addArr = false;
@@ -29,9 +29,9 @@ const Favourite = (props: {data: {dealID: string}}) => {
         }
         setFavourites([...favourites]);
         localStorage.setItem("favourites", JSON.stringify(favourites));
-        let storage = localStorage.getItem('favItem' + (data.dealID) || "");
-        (storage === null) ? localStorage.setItem(('favItem' + (data.dealID)), JSON.stringify(data)) 
-                           : localStorage.removeItem('favItem' + (data.dealID));
+        let storage = localStorage.getItem('favItem' + (data) || "");
+        (storage === null) ? localStorage.setItem(('favItem' + (data)), JSON.stringify(data)) 
+                           : localStorage.removeItem('favItem' + (data));
     }
     return(
         <td className="fave-container">

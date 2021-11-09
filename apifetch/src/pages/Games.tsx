@@ -5,7 +5,7 @@ import { fetchData } from '../helpers'
 import Table from '../components/table'
 import "../App.css"
 
-const Games = (props?: {navInput:string}) => {
+const Games = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [games, setGames] = useState<gamesList>([]);
     const [btnPress, setBtnPress] = useState<boolean>(false);

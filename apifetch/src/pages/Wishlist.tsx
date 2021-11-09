@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "../App.css";
 
 const Wishlist = () => {
-    var favourites = [{}];
-    const getFavourites = JSON.parse(localStorage.getItem('favourites') || "");
-    for(var i = 0; i < getFavourites.length; i++)
-    {
-        let x = getFavourites[i];
-        favourites[i] = JSON.parse(localStorage.getItem('favItem' + [x]) || '');
-    }
-    //const titles = Object.keys(favourites[0]);
+    const [storage, setStorage] = useState([])
+    useEffect(() => {
+        const saved = localStorage.getItem("favourites") || ""
+        const value = JSON.parse(saved)
+        setStorage(value)
+    }, [storage])
     return(
         <div>
             <h1>Wishlist</h1>
-            {favourites.map((items: any, i: number) => (
+            {storage.map((items: any, i: number) => (
                     <div key={i}>
                         <p>{items}</p>
                     </div>
