@@ -1,26 +1,21 @@
 
 import React, { useState, useEffect } from 'react';
 import {VscLoading} from 'react-icons/vsc';
-import {MdCheck, MdClose} from 'react-icons/md';
-import Favourite from '../pages/Favourite';
-import { redirectURL, dealsList, dealEndPoint, dealHeadings } from '../models/deals.models'
+import { dealsList, dealEndPoint, dealHeadings } from '../models/deals.models'
 import StoreIcons  from '../components/storeIcons'
 import { fetchData } from '../helpers'
 import Table from '../components/table'
 import "../App.css";
 
-//TODO: move this to deals.models.ts
-
-
 const Deals = () => {
-    const [deals, setDeals] = useState<dealsList>([]);
+    const [deals, setDeals] = useState<dealsList>([])
     const [error, setError] = useState<null | Error>()
-    const [isLoading, setLoading] = useState(true);
-    const [pageNumber, setPageNumber] = useState(0);
-    const [sortBy, setSortBy] = useState("");
-
+    const [isLoading, setLoading] = useState(true)
+    const [pageNumber, setPageNumber] = useState(0)
+    const [check, setCheck] = useState(false)
     useEffect(() => {
-        let fetchURL = dealEndPoint + pageNumber + sortBy
+        let fetchURL = check ? dealEndPoint + pageNumber + "&onSale=1" : dealEndPoint + pageNumber
+        console.log(fetchURL)
         fetchData<dealsList>(fetchURL).then(x =>{
             if(Array.isArray(x))
             {
@@ -30,12 +25,13 @@ const Deals = () => {
             }
             else setError(x)
         })
-    }, [pageNumber])   
+    }, [pageNumber, check])   
 
     return(
         <div>
             <h1>Deals</h1>
             <StoreIcons/>
+            <>On Sale</><input type="checkbox" onChange={() => setCheck(!check)}/>
             {
                 error ? <p>Fetch Error</p> :
                 isLoading ? <VscLoading/> :             

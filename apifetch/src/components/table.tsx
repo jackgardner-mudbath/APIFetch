@@ -5,14 +5,11 @@ let priceRegex:RegExp = /\d{1,2}\.\d{2}/
 let imgRegex:RegExp = /gif|jpe?g|png|JPG/
 let savingsRegex:RegExp = /\d{2}\.\d{6}/
 
-console.log(priceRegex.test("85.042521"))
-console.log(savingsRegex.test("85.042521"))
-
 const renderHelper = (item: string) => {
   if(imgRegex.test(item))
   {
     return(
-      <img src={item} 
+      <img alt="" src={item} 
        onError={e => {
          const target = e.target as HTMLImageElement;
          if(target)
@@ -21,7 +18,7 @@ const renderHelper = (item: string) => {
       style={{height: '60px', minHeight: '100%', background: 'no-repeat center center', backgroundSize: 'contain'}}/>
     )
   }
-  //Nesting these together because I can't figure out the regexes
+  //Nesting these together because I do not have time to refine the regexes
   else if(priceRegex.test(item))
   {
     if(savingsRegex.test(item))

@@ -19,7 +19,8 @@ export const isGameList = (g: any): g is gamesList => {
     return(g as gamesList) !== undefined
 }
 
-export const gamesEndPoint = 'https://www.cheapshark.com/api/1.0/games?title=';
+export const listGamesEP = 'https://www.cheapshark.com/api/1.0/games?title='
+export const gameLookUpEP = 'https://www.cheapshark.com/api/1.0/games?id='
 
 export const gameHeadings = [
     "Title",

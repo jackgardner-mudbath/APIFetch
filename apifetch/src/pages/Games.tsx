@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { MdSearch } from 'react-icons/md';
-import { gamesList, gamesEndPoint, gameHeadings  } from '../models/games.models'
+import { gamesList, listGamesEP, gameHeadings  } from '../models/games.models'
 import { fetchData } from '../helpers'
 import Table from '../components/table'
 import "../App.css"
@@ -11,7 +11,9 @@ const Games = (props?: {navInput:string}) => {
     const [btnPress, setBtnPress] = useState<boolean>(false);
     const [error, setError] = useState<null | Error>()
     useEffect (()  => {
-        let fetchURL = gamesEndPoint + inputRef.current!.value;
+        //This shoud allow for the search to work for gameID and the title 
+        //let fetchURL = /^\d+$/.test(inputRef.current!.value) ? gameLookUpEP + inputRef.current!.value : listGamesEP + inputRef.current!.value
+        let fetchURL = listGamesEP + inputRef.current!.value
         fetchData<gamesList>(fetchURL).then(x => {
             if(Array.isArray(x)){
                 setGames(x)
