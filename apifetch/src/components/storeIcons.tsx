@@ -19,10 +19,12 @@ const Stores = () => {
     return(
         <>
             {
-                error ? <p>Oops an error has occured please try again</p> :
+               error ? <p>Oops an error has occured please try again</p> :
                stores.map((store) => (
-                  <img key={store.storeID} className="storeBanner" alt = "banner" src={"https://www.cheapshark.com" + store.images.icon}/>
+                  <img key={store.storeID} className='storeBanner' alt = "banner" src={"https://www.cheapshark.com" + store.images.icon}
+                  />
                ))
+               
             }
         </>
     )

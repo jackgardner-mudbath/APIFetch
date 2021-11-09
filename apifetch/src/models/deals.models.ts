@@ -33,8 +33,10 @@ export const redirectURL = "https://www.cheapshark.com/redirect?dealID=";
 export const dealEndPoint = 'https://www.cheapshark.com/api/1.0/deals?pageSize=8&pageNumber='
 
 export const dealHeadings = [
+    "",
     "Title",
     "Savings",
-    "Price",
+    "Sale Price",
+    "Normal Price",
     "Deal Rating"
 ]

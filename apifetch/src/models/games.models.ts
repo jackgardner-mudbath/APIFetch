@@ -23,7 +23,7 @@ export const listGamesEP = 'https://www.cheapshark.com/api/1.0/games?title='
 export const gameLookUpEP = 'https://www.cheapshark.com/api/1.0/games?id='
 
 export const gameHeadings = [
+    "",
     "Title",
     "Price",
-    "Thumbnail"
 ]
