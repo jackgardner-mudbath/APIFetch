@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {IoIosHeart, IoIosHeartEmpty} from "react-icons/io";
 import "../App.css";
 
+// I can't see this being used anywhere
+
 const Favourite = (props: {data: {}}) => {
     const [favourites, setFavourites] = useState<{}[]>([{}]);
     const getFavourites = JSON.parse(localStorage.getItem('favourites') || "");

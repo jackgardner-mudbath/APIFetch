@@ -29,6 +29,7 @@ const Navbar = () => {
                     <NavLink exact to={{pathname: Links.Search, state: ""}} activeClassName="activeLink"  style={{textDecoration: 'none'}}>
                         <li>Search</li>
                     </NavLink>
+                    {/* Commented code */}
                     {/* <NavLink exact to={Links.Wishlist} activeClassName="activeLink" style={{textDecoration: 'none'}}>
                         <li>Wishlist</li>
                     </NavLink> */}
@@ -37,6 +38,7 @@ const Navbar = () => {
             </div>
             {
                 pathname !== '/games' &&
+                // Why don't we move this to a SearchBar component :) 
                 <div className="rightSide">
                     <input placeholder="Search..." type="text" ref={inputRef} onKeyPress={(e) =>{if(e.key === 'Enter') searchBarHandler()}}/>
                     <button onClick={() => {searchBarHandler()}}><MdSearch/></button>

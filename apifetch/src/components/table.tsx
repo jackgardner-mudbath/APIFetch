@@ -7,11 +7,21 @@ let imgRegex:RegExp = /gif|jpe?g|png|JPG/
 let savingsRegex:RegExp = /\d{2}\.\d{6}/
 //let storeIDRegex:RegExp = /\d{3,6}/
 
+
+/* 
+  This should not exist inside of the table, you are now locking this table down to only being able to be used 
+  to render sales and prices. There this be some kind of mapper on each of the places that use it, then the returned
+  value from that object should be what is passed into this table component to be rendered
+
+  It should be as "dumb" as possible. Basically give it data and it renders data
+
+*/
 const renderHelper = (item: string) => {
   //the storeID from the Games API endpoint can sometimes be null
   if(item === "null") {return <></>}
   if(imgRegex.test(item))
   {
+    // This could be put inside of a Styled Component and do away with the styles prop
     return(
       <img alt="" src={item} 
        onError={e => {
@@ -23,6 +33,32 @@ const renderHelper = (item: string) => {
       style={{height: '60px', minHeight: '100%', background: 'no-repeat center center', backgroundSize: 'contain'}}/>
     )
   }
+  /*
+    Not sure exactly what this comment means. 
+
+    If the above is true (regex is satisified), then it will return an image anyway
+    you do not need to chain (nest) these together, you've also got a few duplicate return statements
+
+    The other thing I want to you do is not worry about nested if statements.
+    It a million times easier to read down a page than it is left to right.
+
+
+    ```
+      const isPrice = priceRegex.test(item);
+      const isSavings = savingsRegex.test(item)
+
+      if(isPrice && isSavings) {
+        return <>{Math.floor(parseInt(item))}%</>
+      )
+
+      if(isPrice && !isSavings) {
+        return <>${item}</>
+      }
+
+      return <>{item}</>
+    ```
+  */
+  
   //Nesting these together because I do not have time to refine the regexes
   else if(priceRegex.test(item))
   {
@@ -42,6 +78,8 @@ const renderHelper = (item: string) => {
   else return <>{item}</>
 }
 
+
+// The img in this table should be in it's own styled component, just form a cleanliness perspective
 const StyledTable = styled.table`
 text-align: center;
 margin-left: auto;
@@ -84,9 +122,30 @@ const sortTypes = {
   }
 }
 
+/* 
+  The way the props are made available is very complicated, although is correct and does work, it's not very clean
+  A better way to handle it would be this
+
+  ```
+    interface TableProps {
+      data: any[],
+      headings: string[]
+    }
+
+    const Table = ({ data, heading }: TableProps) => ...
+  ```
+
+  Type safety still exists and we do not need to create any object decorations inline. Overall making for a cleaner experience
+  Also notice the `any[]` as opposed to a `{}[]`. any has the implication that ANYTHING can go there, using a {} has the implication
+  that the only thing that can go there is an empty object
+*/
+
 const Table = (props: { data: {}[], headings: string[]}) => {
     const [currentSort, setCurrentSort] = useState(sortTypes.default)
     const headingOnClick = () => {
+      // A switch statement would be more memory efficient here
+      // If the user goes back to a default sorting order, both the previous blocks get evaluated
+      
         let nextSort = sortTypes.default
         if(currentSort === sortTypes.desc) nextSort = sortTypes.asc
         else if(currentSort === sortTypes.asc) nextSort = sortTypes.default

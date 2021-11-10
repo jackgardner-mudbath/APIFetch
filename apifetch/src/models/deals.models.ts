@@ -1,3 +1,6 @@
+// This is not a type, please update this to be an interface. 
+// Remember a `type` is basically a collection of different items
+// a nice shorthand way of writing `number | string` everywhere kind of thing
 export type deal = {
     dealID: string
     dealRating: string
@@ -20,12 +23,22 @@ export type deal = {
     title: string
 }
 
+// This is correct use of type
 export type dealsList = deal[]
 
+/*
+    this looks like the perfect place to utilize a generic typing
+
+    How about instead of calling this "isDeal", we make it more generic and call it `isError`
+
+    Then we can pass in type of T to it, we do not need to repeat this everywhere for each additional class we may add
+*/
 //Type guard for the custom interface/type above
 export const isDeal = (d:any): d is deal => {
     return (d as deal) !== undefined
 }
+
+// Lets move this to an API file or something, lets keep the models file specificly for model related items
 
 //URL for redirecting to the deal's store page
 export const redirectURL = "https://www.cheapshark.com/redirect?dealID=";
